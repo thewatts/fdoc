@@ -1,6 +1,7 @@
 require 'thor'
 require 'fdoc/service'
 require 'fdoc/meta_service'
+require 'pry'
 
 module Fdoc
   # A Thor::Error to be thrown when an fdoc directory is not found
@@ -53,11 +54,11 @@ module Fdoc
           inside_service_presenter(service_presenter) do
             create_file("index.html", service_presenter.to_html)
 
-            service_presenter.endpoints.each do |endpoint_prefix_group|
-              endpoint_prefix_group.each do |endpoint|
-                create_file(endpoint.url, endpoint.to_html)
-              end
-            end
+#             service_presenter.endpoints.each do |endpoint_prefix_group|
+#               endpoint_prefix_group.each do |endpoint|
+#                 create_file(endpoint.url, endpoint.to_html)
+#               end
+#             end
           end
         end
       end

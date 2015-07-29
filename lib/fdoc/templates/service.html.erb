@@ -11,6 +11,7 @@
     <div id="page">
       <div id="content">
         <h1>
+          I'm in the service.html.erb file!
           <%= @service.name %>
         </h1>
 
@@ -43,6 +44,8 @@
           <%= tag_with_anchor('h2', 'Discussion') %>
           <%= discussion %>
         <% end %>
+
+        <% require 'pry'; binding.pry %>
       </div>
     </div>
   </body>

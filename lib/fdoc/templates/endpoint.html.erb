@@ -1,192 +1,75 @@
 <!DOCTYPE html>
-<html data-ember-extension="1" lang="en">
+<html>
   <head>
-    <title><%= title %></title>
+    <title>
+      <%= title %>
+    </title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
     <link rel="stylesheet" type="text/css" href="<%= css_path %>" />
   </head>
-  <body id="api-reference" class="has-version-check" data-language="curl">
-    <%= render_erb "shared/header.html.erb" %>
-    <%= render_erb "shared/background.html.erb" %>
-    <%= render_erb "shared/sidebar.html.erb" %>
+  <body>
+    <div id="page">
+      <div id="content">
+        <h1>
+          <%= render_erb('shared/endpoint_name.html.erb', endpoint_presenter.get_binding)  %>
+        </h1>
 
-    <div id="content">
-      <% require 'pry'; binding.pry %>
+        <div id="nav">
+          <% if @endpoint.service.meta_service %>
+            <a href="<%= index_path %>">
+              &#187; <%= @endpoint.service.meta_service.name %>
+            </a>
+          <% end %>
+          <% if service_presenter %>
+            <%= service_presenter.name_as_link(:prefix => '&#187;') %>
+          <% end %>
+        </div>
+
+        <%= description %>
+
+        <% if show_request? %>
+          <%= tag_with_anchor('h2', 'Request') %>
+
+          <%= tag_with_anchor('h3', 'Example Request') %>
+          <%= example_request.to_html %>
+
+          <%= tag_with_anchor('h3', 'Request Parameters') %>
+          <%= request_parameters.to_html %>
+        <% end %>
+
+        <%= tag_with_anchor('h2', 'Response') %>
+        <% if show_response? %>
+          <%= tag_with_anchor('h3', 'Example Response') %>
+          <%= example_response.to_html %>
+
+          <%= tag_with_anchor('h3', 'Response Parameters') %>
+          <%= response_parameters.to_html %>
+        <% end %>
+
+        <%= tag_with_anchor('h3', 'Response Codes') %>
+        <% if !successful_response_codes.empty? %>
+          <%= tag_with_anchor('h4', 'Successful Response Codes') %>
+          <ul>
+            <% successful_response_codes.each do |response_code| %>
+            <li>
+              <%= response_code.to_html %>
+            </li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <% if !failure_response_codes.empty? %>
+          <%= tag_with_anchor('h4', 'Failure Response Codes') %>
+          <ul>
+            <% failure_response_codes.each do |response_code| %>
+            <li>
+              <%= response_code.to_html %>
+            </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>
-
-
-<section class="method" id="charge_object">
-  <div class="method-area">
-
-    <div class="method-copy">
-      <div class="method-copy-padding">
-        <h1><%= title %></h1>
-        <% if description.present? %>
-          <p><%= description %></p>
-        <% end %>
-      </div>
-
-      <div class="method-list">
-        <h5 class="method-list-title">Attributes</h5>
-        <ul class="method-list-group">
-          <% charge_object_attributes.each do |object| %>
-            <%= render partial: "layouts/shared/attribute", locals: { attribute: object }%>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-
-    <div class="method-example">
-      <div class="method-example-part">
-        <code class="method-example-object"><span class="lang lang-curl"></span></code>
-        <pre>
-<code class="method-example-object"><span class="lang lang-curl"><code class="language-json">{
-"id": "ch_6Xl7hNfzzZn0YH",
-"object": "charge",
-"created": 1435973868,
-"livemode": false,
-"paid": true,
-"status": "succeeded",
-"amount": 14000,
-"currency": "usd",
-"refunded": false,
-"source": {
-  "id": "card_6AsvaMFKIeWWuT",
-  "object": "card",
-  "last4": "4242",
-  "brand": "Visa",
-  "funding": "credit",
-  "exp_month": 1,
-  "exp_year": 2018,
-  "country": "US",
-  "name": "Jason Jones",
-  "address_line1": null,
-  "address_line2": null,
-  "address_city": null,
-  "address_state": null,
-  "address_zip": null,
-  "address_country": null,
-  "cvc_check": null,
-  "address_line1_check": null,
-  "address_zip_check": null,
-  "tokenization_method": null,
-  "dynamic_last4": null,
-  "metadata": {
-  },
-  "customer": "cus_6Alt1ZnN4oi4PU"
-},
-"captured": true,
-"balance_transaction": "txn_1jEnHEw7dXtwii",
-"failure_message": null,
-"failure_code": null,
-"amount_refunded": 0,
-"customer": "cus_6Alt1ZnN4oi4PU",
-"invoice": "in_6Xk28exNKEIktR",
-"description": null,
-"dispute": null,
-"metadata": {
-},
-"statement_descriptor": null,
-"fraud_details": {
-},
-"receipt_email": null,
-"receipt_number": null,
-"shipping": null,
-"destination": null,
-"application_fee": null,
-"refunds": {
-  "object": "list",
-  "total_count": 0,
-  "has_more": false,
-  "url": "/v1/charges/ch_6Xl7hNfzzZn0YH/refunds",
-  "data": [
-
-  ]
-}
-}</code></span></code>
-</pre>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-<%# <!DOCTYPE html> %>
-<%# <html> %>
-<%#   <head> %>
-<%#     <title> %>
-<%#       <%= title %1> %>
-<%#     </title> %>
-<%#     <meta http-equiv="Content-type" content="text/html;charset=UTF-8"> %>
-<%#     <link rel="stylesheet" type="text/css" href="<%= css_path %1>" /> %>
-<%#   </head> %>
-<%#   <body> %>
-<%#     <div id="page"> %>
-<%#       <div id="content"> %>
-<%#         <h1> %>
-<%#           <%= render_erb('shared/endpoint_name.html.erb', endpoint_presenter.get_binding)  %1> %>
-<%#         </h1> %>
-
-<%#         <div id="nav"> %>
-<%#           <% if @endpoint.service.meta_service %1> %>
-<%#             <a href="<%= index_path %1>"> %>
-<%#               &#187; <%= @endpoint.service.meta_service.name %1> %>
-<%#             </a> %>
-<%#           <% end %1> %>
-<%#           <% if service_presenter %1> %>
-<%#             <%= service_presenter.name_as_link(:prefix => '&#187;') %1> %>
-<%#           <% end %1> %>
-<%#         </div> %>
-
-<%#         <%= description %1> %>
-
-<%#         <% if show_request? %1> %>
-<%#           <%= tag_with_anchor('h2', 'Request') %1> %>
-
-<%#           <%= tag_with_anchor('h3', 'Example Request') %1> %>
-<%#           <%= example_request.to_html %1> %>
-
-<%#           <%= tag_with_anchor('h3', 'Request Parameters') %1> %>
-<%#           <%= request_parameters.to_html %1> %>
-<%#         <% end %1> %>
-
-<%#         <%= tag_with_anchor('h2', 'Response') %1> %>
-<%#         <% if show_response? %1> %>
-<%#           <%= tag_with_anchor('h3', 'Example Response') %1> %>
-<%#           <%= example_response.to_html %1> %>
-
-<%#           <%= tag_with_anchor('h3', 'Response Parameters') %1> %>
-<%#           <%= response_parameters.to_html %1> %>
-<%#         <% end %1> %>
-
-<%#         <%= tag_with_anchor('h3', 'Response Codes') %1> %>
-<%#         <% if !successful_response_codes.empty? %1> %>
-<%#           <%= tag_with_anchor('h4', 'Successful Response Codes') %1> %>
-<%#           <ul> %>
-<%#             <% successful_response_codes.each do |response_code| %1> %>
-<%#             <li> %>
-<%#               <%= response_code.to_html %1> %>
-<%#             </li> %>
-<%#             <% end %1> %>
-<%#           </ul> %>
-<%#         <% end %1> %>
-
-<%#         <% if !failure_response_codes.empty? %1> %>
-<%#           <%= tag_with_anchor('h4', 'Failure Response Codes') %1> %>
-<%#           <ul> %>
-<%#             <% failure_response_codes.each do |response_code| %1> %>
-<%#             <li> %>
-<%#               <%= response_code.to_html %1> %>
-<%#             </li> %>
-<%#             <% end %1> %>
-<%#           </ul> %>
-<%#         <% end %1> %>
-<%#       </div> %>
-<%#     </div> %>
-<%#   </body> %>
-<%# </html> %>
 
