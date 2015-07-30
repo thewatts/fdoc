@@ -1,0 +1,26 @@
+#sidebar
+  %nav.sidebar-nav{ role: "navigation" }
+    %h5.sidebar-nav-heading API
+    %ul.sidebar-nav-items
+      - api_nav_items.each do |item|
+        %li
+          %a.sidebar-nav-item{ href: "##{ item }" }
+            = item.titleize
+
+    %h5.sidebar-nav-heading Methods
+    %ul.sidebar-nav-items
+      - endpoints.each do |endpoints_array|
+        - type = endpoints_array.first.prefix
+        %li
+          %a.sidebar-nav-item.expandable{ href: "##{ type }" }
+            = type.titleize
+          %ul.sidebar-nav-items
+            - if endpoints_array.any? { |e| e.show? }
+              - label = endpoints_array.first.prefix.singularize
+              %li
+                %a.sidebar-nav-item{ href: "##{ label }-object" }
+                  = "The #{ label } object"
+            - endpoints_array.each do |endpoint|
+              %li
+                %a.sidebar-nav-item{ href: "##{ endpoint.anchor }" }
+                  = endpoint.label

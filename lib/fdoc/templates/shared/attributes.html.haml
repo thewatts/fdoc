@@ -1,0 +1,17 @@
+%li.method-list-item
+  %h3.method-list-item-label
+    = property.name
+    %span.method-list-item-validation
+      = property.attributes["type"]
+
+  %p.method-list-item-description
+    = property.attributes["description"]
+
+  - if property.attributes["properties"] && property.attributes["properties"].keys.length > 0
+    .method-list-item-clearfix &nbsp;
+    .method-list.method-list-child
+      %h5.method-list-title child attributes
+      %ul.method-list-group
+        - property.attributes["properties"].keys.each do |key|
+          - attribute = OpenStruct.new(name: key, attributes: property.attributes["properties"][key])
+          = render_haml "shared/attributes", { property: attribute }

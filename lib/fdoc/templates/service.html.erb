@@ -1,53 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      <%= @service.name %>
-    </title>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <link rel="stylesheet" type="text/css" href="<%= css_path %>" />
+    <title><%= @service.name %></title>
+    <link rel="stylesheet" type="text/css" href="<%= fonts_path %>">
+    <link rel="stylesheet" type="text/css" href="<%= css_path %>">
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
   </head>
-  <body>
-    <div id="page">
-      <div id="content">
-        <h1>
-          I'm in the service.html.erb file!
-          <%= @service.name %>
-        </h1>
 
-        <div id="nav">
-          <% if @service.meta_service %>
-            <a href="<%= index_path %>">
-              &#187; <%= @service.meta_service.name %>
-            </a>
-          <% end %>
-        </div>
+  <body id="api-reference" class="has-version-check" data-language="curl">
+    <%= render_haml "shared/header" %>
+    <%= render_haml "shared/background" %>
+    <%= render_haml "shared/sidebar" %>
 
-        <%= description %>
-
-        <%= tag_with_anchor('h2', 'Endpoints') %>
-
-        <% endpoints.each do |endpoint_ary| %>
-          <%= tag_with_anchor('h3', endpoint_ary.first.prefix) %>
-          <ul>
-          <% endpoint_ary.each do |endpoint| %>
-            <li>
-              <a href="<%= endpoint.url %>">
-                <%= render_erb("shared/endpoint_name.html.erb", endpoint.get_binding) %>
-              </a>
-            </li>
-          <% end %>
-          </ul>
+    <div id="content">
+      <% endpoints.each do |endpoints_array| %>
+        <% endpoints_array.each do |endpoint| %>
+          <%= render_haml "shared/endpoint", { endpoint: endpoint } %>
         <% end %>
-
-        <% if discussion %>
-          <%= tag_with_anchor('h2', 'Discussion') %>
-          <%= discussion %>
-        <% end %>
-
-        <% require 'pry'; binding.pry %>
-      </div>
+      <% end %>
     </div>
+
+    <script src="http://stripe.com/assets/jquery-47d53801b9f61ca8a21dcc2571aeb3ec.js"></script>
+    <script src="http://stripe.com/assets/jquery.cookie-d7482a1bbfda18d981eda4398666acdd.js"></script>
+    <script src="http://stripe.com/assets/waypoints.min-2ac93b3c59b0bbb08d88afdcb18761b9.js"></script>
+    <script src="http://stripe.com/assets/prism-0ed7661384b8f160ff618da3b2ef896f.js"></script>
+    <script src="http://stripe.com/assets/shared-3abadcaa3af6e785a085062e45894014.js"></script>
+    <script src="http://stripe.com/assets/api-4cad5fc36ed91ec8b62c10efcb1d99fb.js"></script>'
   </body>
 </html>
-

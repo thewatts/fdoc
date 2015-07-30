@@ -1,0 +1,52 @@
+#version-check
+  .version-check-large
+    %p
+      You are using an older version of the API.
+      %a.arrow Learn More About Api Versions
+  .version-check-small
+    %p
+      You're using an older API version.
+      %a.arrow{:href => "#versioning"} Learn more
+
+#header
+  .header-section.header-section-sidebar
+    .logo
+      %a{ href: "/" }= @service.name
+
+  .header-section.header-section-copy
+    .select-field.jump-menu
+      %select
+        %optgroup{:label => "API"}
+          %option{:value => "intro"} Introduction
+          %option{:value => "authentication"} Authentication
+          %option{:value => "errors"} Errors
+          %option{:value => "pagination"} Pagination
+          %option{:value => "versioning"} Versioning
+          %option{:value => "expanding_objects"} Expanding Objects
+          %option{:value => "metadata"} Metadata
+          %option{:value => "idempotent_requests"} Idempotent Requests
+          %option{:value => "request_ids"} Request IDs
+        %optgroup{:label => "Methods"}
+          %option{:value => "charges"} Charges
+          %option{:value => "refunds"} Refunds
+          %option{:value => "customers"} Customers
+          %option{:value => "cards"} Cards
+          %option{:value => "subscriptions"} Subscriptions
+          %option{:value => "plans"} Plans
+          %option{:value => "coupons"} Coupons
+          %option{:value => "discounts"} Discounts
+          %option{:value => "invoices"} Invoices
+          %option{:value => "invoiceitems"} Invoice Items
+          %option{:value => "disputes"} Disputes
+          %option{:value => "transfers"} Transfers
+          %option{:value => "transfer_reversals"} Transfer Reversals
+          %option{:value => "recipients"} Recipients
+          %option{:value => "bank_accounts"} Bank Accounts
+          %option{:value => "application_fees"} Application Fees
+          %option{:value => "fee_refunds"} Application Fee Refunds
+          %option{:value => "account"} Account
+          %option{:value => "balance"} Balance
+          %option{:value => "events"} Events
+          %option{:value => "tokens"} Tokens
+          %option{:value => "bitcoin_receivers"} Bitcoin Receivers
+          %option{:value => "file_uploads"} File Uploads

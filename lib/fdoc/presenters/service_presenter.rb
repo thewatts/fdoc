@@ -1,11 +1,9 @@
 # An BasePresenter for Fdoc::Service
 class Fdoc::ServicePresenter < Fdoc::BasePresenter
+  extend Forwardable
   attr_reader :service
 
-  extend Forwardable
-
   def_delegators :service, :name, :service_dir, :meta_service
-
 
   def initialize(service, options = {})
     super(options)
@@ -13,11 +11,25 @@ class Fdoc::ServicePresenter < Fdoc::BasePresenter
   end
 
   def to_html
-    render_erb('service.html.erb')
+    render_haml("service")
   end
 
   def to_markdown
     render_erb('service.md.erb')
+  end
+
+  def api_nav_items
+    %w(
+      intro
+      authentication
+      errors
+      pagination
+      versioning
+      expanding_objects
+      metadata
+      idempotent_requests
+      request_ids
+    )
   end
 
   def name_as_link(options = {})
@@ -71,5 +83,4 @@ class Fdoc::ServicePresenter < Fdoc::BasePresenter
     end
     service_path
   end
-
 end

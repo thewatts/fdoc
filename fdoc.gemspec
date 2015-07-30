@@ -31,6 +31,8 @@ Gem::Specification.new do |s|
   s.add_dependency("json-schema", "~> 1.1")
   s.add_dependency("kramdown")
   s.add_dependency("thor")
+  s.add_dependency("tilt")
+  s.add_dependency("activesupport")
 
   s.add_development_dependency("rake")
   s.add_development_dependency("rspec", "~> 2.5")

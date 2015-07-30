@@ -1,0 +1,40 @@
+<section class="method" id="charge_object">
+  <div class="method-area">
+
+    <div class="method-copy">
+      <div class="method-copy-padding">
+        <h1>
+          <%= endpoint.title %>
+        </h1>
+
+        <% if endpoint.description && !endpoint.description.include?("???") %>
+          <p><%= endpoint.description %></p>
+        <% end %>
+      </div>
+
+      <div class="method-list">
+        <% if endpoint.request_parameters.request? %>
+          <h5 class="method-list-title">Arguments</h5>
+          <ul class="method-list-group">
+            <% properties = endpoint.request_parameters.schema["properties"] %>
+            <% properties.keys.each do |key| %>
+              <% property = OpenStruct.new(name: key, attributes: properties[key]) %>
+              <%= render_haml "shared/attributes", { property: property } %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="method-example">
+      <div class="method-example-part">
+<pre>
+<code class="method-example-object"><span class="lang lang-curl"><code class="language-json">
+<%= endpoint.example_response.as_json %>
+</code></span></code>
+</pre>
+      </div>
+    </div>
+
+  </div>
+</section>

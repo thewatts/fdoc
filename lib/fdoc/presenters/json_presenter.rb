@@ -7,6 +7,10 @@ class Fdoc::JsonPresenter
     @json = json
   end
 
+  def as_json
+    JSON.pretty_generate(json)
+  end
+
   def to_html
     if json.kind_of? String
       '<tt>&quot;%s&quot;</tt>' % json.gsub(/\"/, 'quot;')

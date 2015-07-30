@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %title= @service.name
+    %link{ href: fonts_path, rel: "stylesheet", type: "text/css"}/
+    %link{ href: css_path,   rel: "stylesheet", type: "text/css"}/
+    %meta{ content: "width=device-width, initial-scale=1, user-scalable=no", name: "viewport"}/
+
+  %body#api-reference.has-version-check{ data: { language: "curl" } }
+    = render_haml "shared/header"
+    = render_haml "shared/background"
+    = render_haml "shared/sidebar"
+
+    #content
+      - endpoints.each do |endpoints_array|
+        = render_haml "shared/intro", { endpoint: endpoints_array.first }
+
+        - if endpoints_array.any? { |e| e.show? }
+          = render_haml "shared/object", { endpoint: endpoints_array.find { |e| e.show? } }
+
+        - endpoints_array.each do |endpoint|
+          = render_haml "shared/endpoint", { endpoint: endpoint }
+
+    %script{ src: "http://stripe.com/assets/jquery-47d53801b9f61ca8a21dcc2571aeb3ec.js" }
+    %script{ src: "http://stripe.com/assets/jquery.cookie-d7482a1bbfda18d981eda4398666acdd.js" }
+    %script{ src: "http://stripe.com/assets/waypoints.min-2ac93b3c59b0bbb08d88afdcb18761b9.js" }
+    %script{ src: "http://stripe.com/assets/prism-0ed7661384b8f160ff618da3b2ef896f.js" }
+    %script{ src: "http://stripe.com/assets/shared-3abadcaa3af6e785a085062e45894014.js" }
+    %script{ src: "http://stripe.com/assets/api-4cad5fc36ed91ec8b62c10efcb1d99fb.js" }

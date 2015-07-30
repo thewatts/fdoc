@@ -11,8 +11,7 @@
 <div id="header">
   <div class="header-section header-section-sidebar">
     <div class="logo">
-      <a class="site" href="/"></a>
-      <a class="docs" href="/docs/api">api</a>
+      <a href="/"><%= @service.name %></a>
     </div>
   </div>
   <div class="header-section header-section-copy">
@@ -59,34 +58,6 @@
       </select>
     </div>
 
-  </div>
-  <div class="header-section header-section-example">
-    <div id="language">
-      <ul class="language-toggle">
-        <li>
-          <input type="radio" class="language-toggle-source" name="language-toggle" id="toggle-lang-curl" data-language="curl" checked="checked">
-          <label for="toggle-lang-curl" class="language-toggle-button language-toggle-button--curl">curl</label>
-          </li><li>
-          <input type="radio" class="language-toggle-source" name="language-toggle" id="toggle-lang-ruby" data-language="ruby">
-          <label for="toggle-lang-ruby" class="language-toggle-button language-toggle-button--ruby">Ruby</label>
-          </li><li>
-          <input type="radio" class="language-toggle-source" name="language-toggle" id="toggle-lang-python" data-language="python">
-          <label for="toggle-lang-python" class="language-toggle-button language-toggle-button--python">Python</label>
-          </li><li>
-          <input type="radio" class="language-toggle-source" name="language-toggle" id="toggle-lang-php" data-language="php">
-          <label for="toggle-lang-php" class="language-toggle-button language-toggle-button--php">PHP</label>
-          </li><li>
-          <input type="radio" class="language-toggle-source" name="language-toggle" id="toggle-lang-java" data-language="java">
-          <label for="toggle-lang-java" class="language-toggle-button language-toggle-button--java">Java</label>
-          </li><li>
-          <input type="radio" class="language-toggle-source" name="language-toggle" id="toggle-lang-node" data-language="node">
-          <label for="toggle-lang-node" class="language-toggle-button language-toggle-button--node">Node</label>
-          </li><li>
-          <input type="radio" class="language-toggle-source" name="language-toggle" id="toggle-lang-go" data-language="go">
-          <label for="toggle-lang-go" class="language-toggle-button language-toggle-button--go">Go</label>
-        </li>
-      </ul>
-    </div>
   </div>
 </div>
 <!-- /header -->

@@ -1,0 +1,25 @@
+%section.method{ id: endpoint.anchor }
+  .method-area
+    .method-copy
+      .method-copy-padding
+        %h1= endpoint.label
+        %h5
+          = endpoint.verb
+          %em= endpoint.source_path
+
+        - if endpoint.description?
+          %p
+            = endpoint.description
+
+      .method-list
+        - if endpoint.request_parameters.request?
+          %h5.method-list-title Arguments
+          %ul.method-list-group
+            - properties = endpoint.request_parameters.schema["properties"]
+            - properties.keys.each do |key|
+              - property = OpenStruct.new(name: key, attributes: properties[key])
+              = render_haml "shared/attributes", { property: property }
+
+    .method-example
+      .method-example-part
+        = render_json endpoint.example_response.as_json

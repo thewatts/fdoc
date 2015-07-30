@@ -1,7 +1,10 @@
-require 'erb'
 require 'kramdown'
 require 'json'
 require 'forwardable'
+require 'tilt'
+require 'ostruct'
+require 'pry'
+require 'active_support/inflector'
 
 # BasePresenters assist in generating Html for fdoc classes.
 # BasePresenters is an abstract class with a lot of helper methods
@@ -14,10 +17,20 @@ class Fdoc::BasePresenter
     @options = options
   end
 
-  def render_erb(erb_name, binding = get_binding)
-    template_path = path_for_template(erb_name)
-    template = ERB.new(File.read(template_path), nil, '-')
-    template.result(binding)
+  def render_erb(template_name, locals = {})
+    template_path = path_for_template("#{ template_name }.html.erb")
+    template = Tilt[:erb].new(template_path)
+    template.render(self, locals)
+  end
+
+  def render_haml(template_name, locals = {})
+    template_path = path_for_template("#{ template_name }.html.haml")
+    template = Tilt[:haml].new(template_path)
+    template.render(self, locals)
+  end
+
+  def render_json(pretty_json)
+    render_haml("shared/json", json: pretty_json)
   end
 
   def render_markdown(markdown_str)
@@ -38,6 +51,10 @@ class Fdoc::BasePresenter
 
   def css_path
     File.join(html_directory, "styles.css")
+  end
+
+  def fonts_path
+    File.join(html_directory, "fonts.css")
   end
 
   def index_path(subdirectory = "")

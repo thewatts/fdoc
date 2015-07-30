@@ -8,6 +8,10 @@ class Fdoc::EndpointPresenter < Fdoc::BasePresenter
     @endpoint_presenter = self
   end
 
+  def anchor
+    label.parameterize
+  end
+
   def to_html
     render_erb('endpoint.html.erb')
   end
@@ -24,6 +28,23 @@ class Fdoc::EndpointPresenter < Fdoc::BasePresenter
     '%s %s - %s' % [ endpoint.verb, endpoint.path, endpoint.service.name ]
   end
 
+  def index?
+    title =~ /index/
+  end
+
+  def show?
+    title =~ /show/
+  end
+
+  def label
+    case
+    when index?
+      "List #{ prefix }"
+    when show?
+      "Retrieve a #{ prefix.singularize }"
+    end
+  end
+
   def prefix
     endpoint.path.split("/").first
   end
@@ -35,6 +56,10 @@ class Fdoc::EndpointPresenter < Fdoc::BasePresenter
 
   def description
     render_markdown(endpoint.description)
+  end
+
+  def description?
+    description && !description.include?("???")
   end
 
   def show_request?
@@ -87,6 +112,14 @@ class Fdoc::EndpointPresenter < Fdoc::BasePresenter
 
   def path
     zws_ify(@endpoint.path)
+  end
+
+  def source_path
+    endpoint.path
+  end
+
+  def verb
+    endpoint.verb
   end
 
   ATOMIC_TYPES = %w(string integer number boolean null)

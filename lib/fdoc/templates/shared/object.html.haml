@@ -1,0 +1,17 @@
+%section.method{ id: "#{ endpoint.prefix.singularize }-object" }
+  .method-area
+    .method-copy
+      .method-copy-padding
+        %h1= "The #{ endpoint.prefix.singularize.titleize } Object"
+
+      .method-list
+        %h5.method-list-title Attributes
+        %ul.method-list-group
+          - attributes = endpoint.response_parameters.schema["properties"]
+          - attributes.keys.each do |key|
+            - attribute = OpenStruct.new(name: key, attributes: attributes[key])
+            = render_haml "shared/attributes", { property: attribute }
+
+    .method-example
+      .method-example-part
+        = render_json endpoint.example_response.as_json

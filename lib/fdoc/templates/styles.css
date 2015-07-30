@@ -145,6 +145,9 @@ a img {
     line-height: 18px;
     text-transform: uppercase
 }
+#api-reference h5 em {
+  text-transform: lowercase;
+}
 #api-reference h4 {
     color: #4c555a
 }
@@ -1597,4 +1600,3 @@ a img {
         top: 123px
     }
 }
-
