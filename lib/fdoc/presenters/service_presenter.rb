@@ -14,10 +14,6 @@ class Fdoc::ServicePresenter < Fdoc::BasePresenter
     render_haml("service")
   end
 
-  def to_markdown
-    render_erb('service.md.erb')
-  end
-
   def api_nav_items
     %w(
       intro
@@ -38,7 +34,7 @@ class Fdoc::ServicePresenter < Fdoc::BasePresenter
   end
 
   def slug_name
-    service.name.downcase.gsub(/[ \/]/, '_')
+    service.name.parameterize("_")
   end
 
   def url(extension = ".html")

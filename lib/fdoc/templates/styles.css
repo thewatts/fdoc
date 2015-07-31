@@ -401,7 +401,7 @@ a img {
     height: 4px;
     width: 6px;
     content: '';
-    background-image: url("/img/documentation/api/jump-menu-arrow.png")
+    background-image: url("images/jump-menu-arrow.png")
 }
 @media all and (-webkit-min-device-pixel-ratio: 1.5),
 (min--moz-device-pixel-ratio: 1.5),
@@ -410,7 +410,7 @@ a img {
 (min-resolution: 138dpi),
 (min-resolution: 1.5dppx) {
     #api-reference #header .select-field:after {
-        background-image: url("/img/documentation/api/jump-menu-arrow@2x.png");
+        background-image: url("images/jump-menu-arrow@2x.png");
         -webkit-background-size: 6px 4px;
         -moz-background-size: 6px 4px;
         background-size: 6px 4px
@@ -786,7 +786,7 @@ a img {
     background-color: #fff;
     background-repeat: no-repeat;
     content: '';
-    background-image: url("/img/documentation/api/child-list-tail.png")
+    background-image: url("images/child-list-tail.png")
 }
 @media all and (-webkit-min-device-pixel-ratio: 1.5),
 (min--moz-device-pixel-ratio: 1.5),
@@ -795,7 +795,7 @@ a img {
 (min-resolution: 138dpi),
 (min-resolution: 1.5dppx) {
     #api-reference #content .method .method-copy .method-list.method-list-child::before {
-        background-image: url("/img/documentation/api/child-list-tail@2x.png");
+        background-image: url("images/child-list-tail@2x.png");
         -webkit-background-size: 14px 9px;
         -moz-background-size: 14px 9px;
         background-size: 14px 9px
@@ -1599,4 +1599,8 @@ a img {
     #api-reference.has-version-check #content {
         top: 123px
     }
+}
+
+body, h1 {
+  font-family: 'Source Sans Pro', sans-serif !important;
 }

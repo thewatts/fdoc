@@ -2,6 +2,9 @@
 %html
   %head
     %title= @service.name
+    :plain
+      <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
     %link{ href: fonts_path, rel: "stylesheet", type: "text/css"}/
     %link{ href: css_path,   rel: "stylesheet", type: "text/css"}/
     %meta{ content: "width=device-width, initial-scale=1, user-scalable=no", name: "viewport"}/
@@ -13,13 +16,14 @@
 
     #content
       - endpoints.each do |endpoints_array|
-        = render_haml "shared/intro", { endpoint: endpoints_array.first }
+        .method-group
+          = render_haml "shared/intro", { endpoint: endpoints_array.first }
 
-        - if endpoints_array.any? { |e| e.show? }
-          = render_haml "shared/object", { endpoint: endpoints_array.find { |e| e.show? } }
+          - if endpoints_array.any? { |e| e.show? }
+            = render_haml "shared/object", { endpoint: endpoints_array.find { |e| e.show? } }
 
-        - endpoints_array.each do |endpoint|
-          = render_haml "shared/endpoint", { endpoint: endpoint }
+          - endpoints_array.each do |endpoint|
+            = render_haml "shared/endpoint", { endpoint: endpoint }
 
     %script{ src: "http://stripe.com/assets/jquery-47d53801b9f61ca8a21dcc2571aeb3ec.js" }
     %script{ src: "http://stripe.com/assets/jquery.cookie-d7482a1bbfda18d981eda4398666acdd.js" }

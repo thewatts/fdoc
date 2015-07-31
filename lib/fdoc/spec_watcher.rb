@@ -36,9 +36,9 @@ module Fdoc
     end
 
     def path
-      if rspec_3_path
+      if rspec_3?
         rspec_3_path
-      elsif rspec_2_path
+      elsif rspec_2?
         rspec_2_path
       else
         rspec_1_path
@@ -65,13 +65,19 @@ module Fdoc
 
     private
 
+    def rspec_3?
+      RSpec.respond_to?(:current_example)
+    end
+
     def rspec_3_path
-      return unless RSpec.respond_to?(:current_example)
       RSpec.current_example.metadata[:fdoc]
     end
 
+    def rspec_2?
+      respond_to?(:example)
+    end
+
     def rspec_2_path
-      return unless respond_to?(:example)
       example.metadata[:fdoc]
     end
 
