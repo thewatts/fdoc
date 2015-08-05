@@ -16,6 +16,7 @@ class Fdoc::Endpoint
   def consume_request(params, successful=true)
     if successful
       schema = set_additional_properties_false_on(request_parameters.dup)
+      binding.pry
       JSON::Validator.validate!(schema, stringify_keys(params))
     end
   end
@@ -27,7 +28,6 @@ class Fdoc::Endpoint
         rc["status"].to_i == status_code    # "200 OK"
       )
     end
-
 
     if !response_code
       raise Fdoc::UndocumentedResponseCode,

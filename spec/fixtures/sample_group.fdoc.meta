@@ -7,3 +7,5 @@ discussion: |
   this service.
 services:
   - ./members
+  - ./members
+  - ./members
